@@ -3,22 +3,22 @@ import styled, {css} from 'styled-components';
 import {AppContext} from "./AppProvider";
 
 const Logo = styled.div`
-  font-size: 1.5em; 
+  font-size: 1.5em;
 `
 
 const Bar = styled.div`
-  display: grid; 
-  margin-bottom: 40px; 
+  display: grid;
+  margin-bottom: 40px;
   grid-template-columns: 180px auto 100px 100px; 
 `
 
 const ControlButtonElem = styled.div`
-  cursor: pointer; 
+  cursor: pointer;
   ${props => props.active && css`
     text-shadow: 0px 0px 60px #03ff03;
   `}
   ${props => props.hidden && css`
-    display: none; 
+    display: none;
   `}
 `
 
@@ -45,7 +45,7 @@ function ControlButton({name}){
 export default function(){
   return (
     <Bar>
-      <Logo> CryptoDash </Logo>
+      <Logo> CryptoMania </Logo>
       <div/>
       <ControlButton active name="dashboard"/>
       <ControlButton name="settings"/>

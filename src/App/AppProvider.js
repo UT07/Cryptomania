@@ -116,7 +116,7 @@ export class AppProvider extends React.Component {
         this.fetchPrices();
         this.fetchHistorical();
     });
-    localStorage.setItem('cryptoDash', JSON.stringify({
+    localStorage.setItem('CryptoMania', JSON.stringify({
       favorites: this.state.favorites,
       currentFavorite
     }));
@@ -128,18 +128,18 @@ export class AppProvider extends React.Component {
       historical: null
     }, this.fetchHistorical);
 
-    localStorage.setItem('cryptoDash', JSON.stringify({
-      ...JSON.parse(localStorage.getItem('cryptoDash')),
+    localStorage.setItem('CryptoMania', JSON.stringify({
+      ...JSON.parse(localStorage.getItem('CryptoMania')),
       currentFavorite: sym
     }))
   }
 
   savedSettings(){
-    let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'));
-    if(!cryptoDashData){
+    let CryptoManiaData = JSON.parse(localStorage.getItem('CryptoMania'));
+    if(!CryptoManiaData){
       return {page: 'settings', firstVisit: true}
     }
-    let {favorites, currentFavorite} = cryptoDashData;
+    let {favorites, currentFavorite} = CryptoManiaData;
     return {favorites, currentFavorite};
   }
 
