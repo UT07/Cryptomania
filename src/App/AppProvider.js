@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+const cc=require('cryptocompare');
 export const AppContext=React.createContext();
  class AppProvider extends Component{
   constructor(props){
@@ -10,6 +11,13 @@ export const AppContext=React.createContext();
       confirmFavorites: this.confirmFavorites
     }
   }
+   componentDidMount=()=>{
+     this.fetchCoins();
+   }
+   fetchCoins=async()=>{
+     let coinList=(await cc.coinList()).Data;
+     this.setState({coinList});
+   }
    confirmFavorites=()=>{
      this.setState({
        firstVisit:false,
