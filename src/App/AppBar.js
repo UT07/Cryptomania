@@ -1,40 +1,54 @@
 import React from 'react';
-import styled,{css} from 'styled-components';
-import{AppContext} from "./AppProvider";
+import styled, {css} from 'styled-components';
+import {AppContext} from "./AppProvider";
+
 const Logo = styled.div`
-font-size: 1.5em;
-`
-const Bar=styled.div`
-  display: grid;
-grid-template-columns: auto 180px 100px 100px;
+  font-size: 1.5em; 
 `
 
-const ControlButtonElem=styled.div`
-  cursor:pointer;
-${props=>props.active && css`
-    color:yellow;
+const Bar = styled.div`
+  display: grid; 
+  margin-bottom: 40px; 
+  grid-template-columns: 180px auto 100px 100px; 
+`
+
+const ControlButtonElem = styled.div`
+  cursor: pointer; 
+  ${props => props.active && css`
     text-shadow: 0px 0px 60px #03ff03;
   `}
+  ${props => props.hidden && css`
+    display: none; 
+  `}
 `
+
 function toProperCase(lower){
-  return lower.charAt(0).toUpperCase()+lower.substr(1);
+  return lower.charAt(0).toUpperCase() + lower.substr(1);
 }
-function ControlButton({name,active}){
-  return(
+
+function ControlButton({name}){
+  return (
     <AppContext.Consumer>
-      {({page,setPage})=>(
-      <ControlButtonElem active={page===name} onClick={()=>setPage(name)}>
-      {toProperCase(name)}
-    </ControlButtonElem>
+      {({firstVisit, page, setPage}) => (
+        <ControlButtonElem
+          active={page === name}
+          onClick={()=> setPage(name)}
+          hidden={firstVisit && name === 'dashboard'}
+        >
+          {toProperCase(name)}
+        </ControlButtonElem>
         )}
     </AppContext.Consumer>
-    
   )
 }
+
 export default function(){
-  return<Bar> 
-      <Logo>CryptoMania</Logo>
-      <ControlButton active name={"CryptoDash"}/>
-      <ControlButton active name="Settings"/>
-  </Bar>
+  return (
+    <Bar>
+      <Logo> CryptoDash </Logo>
+      <div/>
+      <ControlButton active name="dashboard"/>
+      <ControlButton name="settings"/>
+    </Bar>
+  );
 }
